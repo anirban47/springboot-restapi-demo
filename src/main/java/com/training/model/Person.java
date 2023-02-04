@@ -21,10 +21,4 @@ public class Person {
 	public void setPid(int pid) {
 		this.pid = pid;
 	}
-	@Override
-	public String toString()
-	{
-		return "The Name is: "+ pid;
-	}
-
 }

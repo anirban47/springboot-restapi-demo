@@ -1,8 +1,6 @@
 package com.training.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -12,22 +10,6 @@ public class Cart {
 	private int itemID;
 	private int quantity;
 	
-//	private Person person;
-//	
-//	public Person getPerson() {
-//		return person;
-//	}
-//	public void setPerson(Person person) {
-//		this.person = person;
-//	}
-	
-//	public int getRowID() {
-//		return rowID;
-//	}
-//	public void setRowID(int rowID) {
-//		this.rowID = rowID;
-//	}
-
 	public int getCartID() {
 		return cartID;
 	}
