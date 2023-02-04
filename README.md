@@ -17,7 +17,7 @@ Returns a JSON array of all person entities in database. If no entities are pres
 *HTTP Status Response Codes*   
 `200` OK
 
-![Preview](./Screenshots/FindAllPersons.png)
+![Preview](./Screenshots/findAllPersons.png)
 
 _**2. Find a person by ID**_   
 `GET /api/persons/{pid}`   
