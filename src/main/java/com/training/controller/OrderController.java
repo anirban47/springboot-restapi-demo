@@ -64,20 +64,15 @@ public class OrderController {
 			String orderObjStatus = orderObj.getOrderStatus();
 			System.out.println(orderObjStatus);
 			if(orderObjStatus.equals("PENDING")) {
-				
-				// Check if quantity is enough
-				
 				// Update order status in order table
 				orderObj.setOrderStatus("PROCESSED");
 				orderRepo.save(orderObj);
 				apiResponse = ResponseEntity.ok().body(orderObj);
 				
-				// Reduce item quantity in item table by 1
-				Optional<Cart> currOrderCartOptional = cartRepo.findById(orderObj.getCartID());
-				Cart currOrderCart = currOrderCartOptional.get();
-				int itemQuantityInCart = currOrderCart.getQuantity();
-				Optional<Item> currOrderItemOptional = itemRepo.findById(currOrderCart.getItemID());
-				Item currOrderItemObj = currOrderItemOptional.get(); 
+				// Reduce item quantity in item table by quantity in cart
+				Cart currOrderCartObj = cartRepo.findById(orderObj.getCartID()).get();
+				int itemQuantityInCart = currOrderCartObj.getQuantity();
+				Item currOrderItemObj = itemRepo.findById(currOrderCartObj.getItemID()).get();
 
 				int prevItemQuantity = currOrderItemObj.getQuantity();
 				currOrderItemObj.setQuantity(prevItemQuantity - itemQuantityInCart);
