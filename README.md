@@ -12,9 +12,9 @@
 **Persons**  
 _**1. List all persons**_   
 `GET /api/persons`  
-	Returns a JSON array of all person entities in database. If no entities are present, returns an empty array.  
-	*HTTP Status Response Codes*   
-	`200` OK
+Returns a JSON array of all person entities in database. If no entities are present, returns an empty array.  
+*HTTP Status Response Codes*   
+`200` OK
 
 ![Preview](./Screenshots/FindAllPersons.png)
 
