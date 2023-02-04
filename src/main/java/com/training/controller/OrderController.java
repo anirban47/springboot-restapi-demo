@@ -62,23 +62,26 @@ public class OrderController {
 		if(order.isPresent()) {
 			Orders orderObj = order.get();
 			String orderObjStatus = orderObj.getOrderStatus();
-
-			if(orderObjStatus == "PENDING") {
+			System.out.println(orderObjStatus);
+			if(orderObjStatus.equals("PENDING")) {
+				
+				// Check if quantity is enough
 				
 				// Update order status in order table
-				Orders updatedOrder = new Orders(orderObj.getOrderID(), orderObj.getCartID(), "PROCESSED");
-//				updatedOrder.setOrderID(orderObj.getOrderID());
-//				updatedOrder.setCartID(orderObj.getCartID());
-//				updatedOrder.setOrderStatus("PROCESSED");
-				orderRepo.save(updatedOrder);
-				apiResponse = ResponseEntity.ok().body(updatedOrder);
+				orderObj.setOrderStatus("PROCESSED");
+				orderRepo.save(orderObj);
+				apiResponse = ResponseEntity.ok().body(orderObj);
 				
 				// Reduce item quantity in item table by 1
-				Cart currOrderCart = cartRepo.findById(orderObj.getCartID()).get();
-				Item currOrderItem = itemRepo.findById(currOrderCart.getItemID()).get();
+				Optional<Cart> currOrderCartOptional = cartRepo.findById(orderObj.getCartID());
+				Cart currOrderCart = currOrderCartOptional.get();
+				int itemQuantityInCart = currOrderCart.getQuantity();
+				Optional<Item> currOrderItemOptional = itemRepo.findById(currOrderCart.getItemID());
+				Item currOrderItemObj = currOrderItemOptional.get(); 
 
-				Item updatedItem = new Item(currOrderItem.getItemID(), currOrderItem.getName(), currOrderItem.getPrice(), currOrderItem.getQuantity() - 1);
-				itemRepo.save(updatedItem);
+				int prevItemQuantity = currOrderItemObj.getQuantity();
+				currOrderItemObj.setQuantity(prevItemQuantity - itemQuantityInCart);
+				itemRepo.save(currOrderItemObj);
 				
 			} else {
 				apiResponse = ResponseEntity.badRequest().body("Order already processed");

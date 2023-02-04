@@ -8,9 +8,6 @@ import javax.persistence.Id;
 @Entity
 public class Cart {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int rowID;
-	
 	private int cartID; // Keep the same as pid
 	private int itemID;
 	private int quantity;
@@ -24,12 +21,12 @@ public class Cart {
 //		this.person = person;
 //	}
 	
-	public int getRowID() {
-		return rowID;
-	}
-	public void setRowID(int rowID) {
-		this.rowID = rowID;
-	}
+//	public int getRowID() {
+//		return rowID;
+//	}
+//	public void setRowID(int rowID) {
+//		this.rowID = rowID;
+//	}
 
 	public int getCartID() {
 		return cartID;

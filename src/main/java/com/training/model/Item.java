@@ -11,6 +11,9 @@ public class Item {
 	private double price;
 	private int quantity;
 	
+	public Item() {
+	}
+	
 	public Item(int itemID, String name, double price, int quantity) {
 		setItemID(itemID);
 		setName(name);
