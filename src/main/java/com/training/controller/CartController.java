@@ -33,7 +33,6 @@ public class CartController {
     
 	@GetMapping("/{cartID}")
 	public ResponseEntity<Object> findCart(@PathVariable("cartID") int cartID) {
-		// Make this return a list of carts
 		Optional<Cart> cart = cartRepo.findById(cartID);
 	    if(cart.isPresent()) {
 	        return ResponseEntity.ok().body(cart.get());
